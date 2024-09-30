@@ -13,16 +13,16 @@ The rapid development of artificial intelligence-of-things (AIOT) has led to a s
 VCS O-2018.09-SP2_Full64
 
 ### Requirements (network training)
-numpy==2.1.1\\
-Requests==2.32.3\\
-scikit_learn==1.5.2\\
-scipy==1.14.1\\
-spikingjelly==0.0.0.0.14\\
-torch==2.4.1\\
-torchaudio==2.4.1\\
-torchsummary==1.5.1\\
-torchvision==0.19.1\\
-utils==1.0.2\\
+numpy==2.1.1 <br />
+Requests==2.32.3 <br />
+scikit_learn==1.5.2 <br />
+scipy==1.14.1 <br />
+spikingjelly==0.0.0.0.14 <br />
+torch==2.4.1 <br />
+torchaudio==2.4.1 <br />
+torchsummary==1.5.1 <br />
+torchvision==0.19.1 <br />
+utils==1.0.2 <br />
 
 ### Folder Structure
 ```
