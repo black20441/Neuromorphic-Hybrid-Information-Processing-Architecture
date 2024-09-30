@@ -11,10 +11,10 @@ The rapid development of artificial intelligence-of-things (AIOT) has led to a s
 </p>
 
 
-### Requirements (verilog simulation)
+### Environment (verilog simulation)
 VCS O-2018.09-SP2_Full64
 
-### Requirements (network training)
+### Requirements (Python)
 numpy==2.1.1 <br />
 Requests==2.32.3 <br />
 scikit_learn==1.5.2 <br />
