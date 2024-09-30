@@ -6,8 +6,6 @@ The rapid development of artificial intelligence-of-things (AIOT) has led to a s
 
 <p align="center">
 <img src="https://github.com/black20441/Neuromorphic-Hybrid-Information-Processing-Architecture/blob/53c23c2a1c6dca15db5b52feed0d398b46a27379/figs/network_architecture.jpg?raw=true" width="100%">
-
-
 </p>
 
 
