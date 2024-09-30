@@ -1,0 +1,183 @@
+                         Chronologic VCS (TM)
+       Version O-2018.09-SP2_Full64 -- Fri Sep 27 11:01:04 2024
+               Copyright (c) 1991-2018 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+
+Warning-[RSPAI] Run simv switch found in command line
+  Directly run simulation switch '-R' found in commmand line, and all plus 
+  arguments specified will be passed to run-time.
+  So the switch 'plusarg_save' will be ignored.
+
+Parsing design file './tsk/timescale.v'
+Parsing design file 'rtl/define.vh'
+Parsing design file 'rtl/AER_coding.v'
+Parsing design file 'rtl/bram.v'
+Parsing design file 'rtl/spike_code_converter.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/spike_code_converter.v'.
+Parsing design file 'rtl/conv_ram_controller.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/conv_ram_controller.v'.
+Parsing design file 'rtl/conv1_weight_search.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/conv1_weight_search.v'.
+Parsing design file 'rtl/conv1.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/conv1.v'.
+Parsing design file 'rtl/fc_2ram_controller_layer1.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/fc_2ram_controller_layer1.v'.
+Parsing design file 'rtl/fc_2ram_controller_layer2.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/fc_2ram_controller_layer2.v'.
+Parsing design file 'rtl/local_position.v'
+Parsing design file 'rtl/MP_refresh_conv1.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/MP_refresh_conv1.v'.
+Parsing design file 'rtl/MP_refresh2_layer1.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/MP_refresh2_layer1.v'.
+Parsing design file 'rtl/MP_refresh2_layer2.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/MP_refresh2_layer2.v'.
+Parsing design file 'rtl/pe_fc2_layer1.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/pe_fc2_layer1.v'.
+Parsing design file 'rtl/pe_fc2_layer2.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/pe_fc2_layer2.v'.
+Parsing design file 'rtl/pic_num_detection.v'
+Parsing design file 'rtl/single_bram1.v'
+Parsing design file 'rtl/single_bram2.v'
+Parsing design file 'rtl/syn_fifo.v'
+Parsing design file 'rtl/syn_fifo2_layer1.v'
+Parsing design file 'rtl/syn_fifo2_layer2.v'
+Parsing design file 'rtl/syn_fifo2.v'
+Parsing design file 'rtl/TOP_conv.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/TOP_conv.v'.
+Parsing design file 'rtl/top_fc.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/top_fc.v'.
+Parsing design file 'rtl/TOP_snn.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/TOP_snn.v'.
+Parsing design file 'rtl/uart_test.v'
+Parsing design file 'rtl/valid_pixel_search.v'
+Parsing included file 'rtl/../rtl/define.vh'.
+Back to file 'rtl/valid_pixel_search.v'.
+Parsing design file 'rtl/test_ram.v'
+Parsing design file 'rtl/weight_ram.v'
+Parsing design file 'testbench/testbench_TOP.sv'
+Top Level Modules:
+       testbench_TOP
+TimeScale is 1 ns / 100 ps
+
+Warning-[TFIPC] Too few instance port connections
+rtl/top_fc.v, 94
+TOP_fc, "pe_fc_layer1 #(.WEIGHT_ADDR_BIAS(512), .INPUT_CHANNEL_NUM(128), .OUTPUT_CHANNEL_NUM(256)) u_pe_fc_layer1_inst( .clk (clk),  .rstn (rstn),  .s_index_ram (s_index_ram_1),  .addr_most (addr_most_1),  .s_index_valid (addr_valid_1),  .mp_out (mp_out_1),  .output_num_switch_pe (output_num_switch_pe_1),  .channel_num (channel_num_1),  .mp_ready (mp_ready_1),  .ram_release (ram_release1));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[TFIPC] Too few instance port connections
+rtl/top_fc.v, 190
+TOP_fc, "pe_fc_layer2 #(.WEIGHT_ADDR_BIAS(512), .INPUT_CHANNEL_NUM(256), .OUTPUT_CHANNEL_NUM(10)) u_pe_fc_layer2_inst( .clk (clk),  .rstn (rstn),  .s_index_ram (s_index_ram_2),  .addr_most (addr_most_2),  .s_index_valid (addr_valid_2),  .mp_out (mp_out_2),  .output_num_switch_pe (output_num_switch_pe_2),  .channel_num (channel_num_2),  .mp_ready (mp_ready_2),  .ram_release (ram_release2));"
+  The above instance has fewer port connections than the module definition.
+  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
+  ports.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+rtl/conv1.v, 286
+"weight_ram weight_ram( .clka (clk),  .wea (wea),  .addra (addra),  .dina (dina),  .clkb (clk),  .addrb (addr_r_weight),  .doutb (weight_index));"
+  The following 1-bit expression is connected to 4-bit port "dina" of module 
+  "weight_ram", instance "weight_ram".
+  Expression: dina
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+rtl/top_fc.v, 190
+"pe_fc_layer2 #(512, 256, 10, , , , ) u_pe_fc_layer2_inst( .clk (clk),  .rstn (rstn),  .s_index_ram (s_index_ram_2),  .addr_most (addr_most_2),  .s_index_valid (addr_valid_2),  .mp_out (mp_out_2),  .output_num_switch_pe (output_num_switch_pe_2),  .channel_num (channel_num_2),  .mp_ready (mp_ready_2),  .ram_release (ram_release2));"
+  The following 9-bit expression is connected to 7-bit port "channel_num" of 
+  module "pe_fc_layer2", instance "u_pe_fc_layer2_inst".
+  Expression: channel_num_2
+  	use +lint=PCWM for more details
+
+
+Warning-[PCWM-W] Port connection width mismatch
+rtl/top_fc.v, 207
+"MP_refresh_layer2 #(407, 15'b0, 10, , , , ) u_MP_refresh_layer2( .clk (clk),  .rstn (rstn),  .mp_ready (mp_ready_2),  .mp_out (mp_out_2),  .channel_num (channel_num_2),  .output_num_switch_pe (output_num_switch_pe_2),  .neuron (s_index_o),  .neuron_valid (w_en));"
+  The following 9-bit expression is connected to 7-bit port "channel_num" of 
+  module "MP_refresh_layer2", instance "u_MP_refresh_layer2".
+  Expression: channel_num_2
+  	use +lint=PCWM for more details
+
+VCS Coverage Metrics Release O-2018.09-SP2_Full64 Copyright (c) 1991-2018 by Synopsys Inc.
+Starting vcs inline pass...
+17 modules and 0 UDP read.
+recompiling module bram
+recompiling module spike_code_converter
+recompiling module conv_ram_controller
+recompiling module fc_2ram_controller_layer2
+recompiling module local_position
+recompiling module MP_refresh_conv1
+recompiling module MP_refresh_layer2
+recompiling module pe_fc_layer2
+recompiling module pic_num_detection
+recompiling module sync_fifo
+recompiling module sync_fifo_layer1
+recompiling module sync_fifo_layer2
+recompiling module TOP_fc
+recompiling module uart_test
+recompiling module test_ram
+recompiling module weight_ram
+recompiling module testbench_TOP
+All of 17 modules done
+make[1]: Entering directory `/home/xcx/project/communication_opensource/csrc'
+make[1]: Leaving directory `/home/xcx/project/communication_opensource/csrc'
+make[1]: Entering directory `/home/xcx/project/communication_opensource/csrc'
+rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv    -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ -Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  -rdynamic  -Wl,-rpath=/app/EDA/vcs_O-2018.09-SP2/linux64/lib -L/app/EDA/vcs_O-2018.09-SP2/linux64/lib   objs/amcQw_d.o   _847_archive_1.so        rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          -lzerosoft_rt_stubs -lvirsim -lerrorinf -lsnpsmalloc -lvfs /app/EDA/Verdi_O-2018.09-SP2/share/PLI/VCS/LINUX64/pli.a    -lvcsnew -lsimprofile -lreader_common /app/EDA/vcs_O-2018.09-SP2/linux64/lib/libBA.a -luclinative /app/EDA/vcs_O-2018.09-SP2/linux64/lib/vcs_tls.o   -Wl,-whole-archive -lvcsucli -Wl,-no-whole-archive        _vcs_pli_stub_.o   /app/EDA/vcs_O-2018.09-SP2/linux64/lib/vcs_save_restore_new.o -ldl -lm  -lc -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/home/xcx/project/communication_opensource/csrc'
+Notice: timing checks disabled with +notimingcheck at compile-time
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2_Full64; Runtime version O-2018.09-SP2_Full64;  Sep 27 11:01 2024
+NOTE: automatic random seed used: 2490985265
+
+ VCS Coverage Metrics Release O-2018.09-SP2_Full64 Copyright (c) 1991-2018 by Synopsys Inc.
+dump_file = fsdb/RTL.fsdb
+*Verdi* Loading libsscore_vcs201809.so
+FSDB Dumper for VCS, Release Verdi_O-2018.09-SP2, Linux x86_64/64bit, 02/21/2019
+(C) 1996 - 2019 by Synopsys, Inc.
+*Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
+*Verdi* : Create FSDB file 'fsdb/RTL.fsdb'
+*Verdi* : Begin traversing the scope (testbench_TOP), layer (0).
+*Verdi* : End of traversing.
+*Verdi* : Begin traversing the MDAs, layer (0).
+*Verdi* : Enable +mda and +packedmda dumping.
+*Verdi* : End of traversing the MDAs.
+$finish called from file "testbench/testbench_TOP.sv", line 70.
+$finish at simulation time             19153200
+
+---------------------------------------------------------------------------
+VCS Coverage Metrics: during simulation line, cond, FSM was monitored
+---------------------------------------------------------------------------
+
+ Coverage status: End of All Coverages ...
+
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1915320000 ps
+CPU Time:      2.830 seconds;       Data structure size:   0.5Mb
+Fri Sep 27 11:01:13 2024
+CPU time: 1.189 seconds to compile + .577 seconds to elab + .189 seconds to link + 2.878 seconds in simulation

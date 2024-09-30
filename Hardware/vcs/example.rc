@@ -1,0 +1,158 @@
+Magic 271485
+Revision Verdi_O-2018.09-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 27 2560 900 393 148
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/home/xcx/project/communication_opensource/fsdb/RTL.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+windowTimeUnit 100ns
+
+; waveform viewport range
+zoom 0.000000 19344.732000 100n
+cursor 13659.460000
+marker 13658.140000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 23
+; marker line index
+markerPos 67
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+aliasmapname conv1.current_state
+nalias IDLE		2'b00		NULL
+nalias RAM		2'b01		NULL
+nalias PX_SEARCH		2'b10		NULL
+nalias OVER		2'b11		NULL
+
+addGroup "G1"
+activeDirFile "" "/home/xcx/project/communication_opensource/fsdb/RTL.fsdb"
+addSignal -h 15 /testbench_TOP/almost_full
+addSignal -h 15 -holdScope clk
+addSignal -h 15 -holdScope full
+addSignal -h 15 -holdScope rstn
+addSignal -h 15 -holdScope s_index_o[15:0]
+addSignal -h 15 -holdScope w_en
+addGroup "G2"
+addGroup "TOP_input"
+addSignal -h 15 /testbench_TOP/dut/clk
+addSignal -h 15 -holdScope rstn
+addSignal -h 15 -holdScope s_index_o[15:0]
+addSignal -h 15 -holdScope w_en
+addGroup "TOP_conv"
+addSignal -h 15 /testbench_TOP/dut/u_TOP_conv/addr_most[8:0]
+addSignal -h 15 -holdScope addr_r_spike[8:0]
+addSignal -h 15 -holdScope addr_valid
+addSignal -h 15 -holdScope clk
+addSignal -h 15 -holdScope s_index_i[15:0]
+addSignal -h 15 -holdScope s_index_o[15:0]
+addSignal -h 15 -holdScope s_index_ram[15:0]
+addGroup "controller(coder)"
+addGroup "conv1"
+addSignal -h 15 /testbench_TOP/dut/u_TOP_conv/u_conv1/MP_valid
+addSignal -h 15 -holdScope mp_w_en
+addSignal -h 15 -holdScope mp_addr_w[8:0]
+addSignal -h 15 -2COMP -UDEC -holdScope mp_w[14:0]
+addSignal -h 15 -holdScope addr_most[8:0]
+addSignal -h 15 -holdScope addr_r_spike[8:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope addr_r_weight[17:0]
+addSignal -h 15 -holdScope channel_o[6:0]
+addSignal -h 15 /testbench_TOP/dut/u_TOP_conv/u_conv1/u_conv1_weight_search/channel_o_reg[6:0]
+aliasname conv1.current_state
+addSignal -h 15 -UNSIGNED -HEX /testbench_TOP/dut/u_TOP_conv/u_conv1/current_state[1:0]
+aliasname conv1.current_state
+addSignal -h 15 -UNSIGNED -HEX -holdScope next_state[1:0]
+addSignal -h 15 /testbench_TOP/dut/u_TOP_conv/u_conv1/u_conv1_weight_search/valid_pix_pos_i[22:0]
+addSignal -h 15 -holdScope valid_pix_pos_i_reg[22:0]
+addSignal -h 15 /testbench_TOP/dut/u_TOP_conv/u_conv1/cnt_channel[6:0]
+addSignal -h 15 -holdScope s_index_conv1[15:0]
+addSignal -h 15 -holdScope s_index_conv[15:0]
+addSignal -h 15 -holdScope s_index_o[15:0]
+addSignal -h 15 -holdScope s_index_ram[15:0]
+addGroup "TOP_fc"
+addSignal -h 15 /testbench_TOP/dut/u_TOP_fc/addr_most_1[8:0]
+addSignal -h 15 -holdScope addr_most_2[8:0]
+addSignal -h 15 -holdScope addr_valid_1
+addSignal -h 15 -holdScope addr_valid_2
+addSignal -h 15 -holdScope almost_empty_out1
+addSignal -h 15 -holdScope almost_empty_out2
+addSignal -h 15 -holdScope almost_full_out2
+addSignal -h 15 -holdScope channel_num_1[6:0]
+addSignal -h 15 -holdScope channel_num_2[6:0]
+addSignal -h 15 -holdScope mp_out_1[14:0]
+addSignal -h 15 -holdScope mp_out_2[14:0]
+addSignal -h 15 -holdScope mp_ready_1
+addSignal -h 15 -holdScope mp_ready_2
+addSignal -h 15 -holdScope neuron_1[15:0]
+addSignal -h 15 -holdScope neuron_2[15:0]
+addSignal -h 15 -holdScope neuron_valid_1
+addSignal -h 15 -holdScope rd_data_out1[15:0]
+addSignal -h 15 -holdScope rd_data_out2[15:0]
+addSignal -h 15 -holdScope s_index_i_1[15:0]
+addSignal -h 15 -holdScope s_index_i_2[15:0]
+addSignal -h 15 -holdScope s_index_o[15:0]
+addSignal -h 15 -holdScope s_index_ram_1[15:0]
+addSignal -h 15 -holdScope s_index_ram_2[15:0]
+addSignal -h 15 -holdScope w_en
+addSignal -h 15 -holdScope write_in_en_1
+addSignal -h 15 -holdScope write_in_en_2
+addGroup "G8"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+activeDirFile "" "/home/xcx/project/communication_opensource/fsdb/RTL.fsdb"
+
+GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
+getSignalForm close
+
+"/testbench_TOP"
+"/testbench_TOP/dut"
+"/testbench_TOP/dut/u_TOP_conv"
+"/testbench_TOP/dut/u_TOP_conv/u_conv1"
+
+SCOPE_LIST_BEGIN
+"/testbench_TOP"
+"/testbench_TOP/dut/u_TOP_conv"
+"/testbench_TOP/dut"
+"/testbench_TOP/dut/u_TOP_conv/u_controller"
+"/testbench_TOP/dut/u_TOP_conv/u_conv1"
+"/testbench_TOP/dut/u_TOP_conv/u_test_ram"
+"/testbench_TOP/dut/u_TOP_conv/u_uart_test"
+"/testbench_TOP/dut/u_TOP_conv/u_conv1/conv_sync_fifo"
+"/testbench_TOP/dut/u_TOP_conv/u_conv1/conv_mp"
+"/testbench_TOP/dut/u_TOP_conv/u_conv1/u_MP_refresh_conv1"
+"/testbench_TOP/dut/u_TOP_conv/u_conv1/u_conv1_weight_search"
+"/testbench_TOP/dut/u_TOP_fc"
+SCOPE_LIST_END
+
+GETSIGNALFORM_SCOPE_HIERARCHY_END
+
+

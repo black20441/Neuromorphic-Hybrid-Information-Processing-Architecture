@@ -1,0 +1,24 @@
+`timescale 1 ns/ 100 ps
+`define SYNAPSE_INDEX  16
+`define ADDR   12
+`define WEIGHT_INDEX   4
+`define INDEX_PIC   10
+`define INDEX_PX   4
+`define INDEX_PX_WIDE  2
+`define WEIGHT_WIDE  16
+`define WEIGHT_BRAM  16
+`define CHANNEL_WIDE  7
+`define MP_WIDE  15
+`define MP_ADDR  9
+`define INDEX_PX_X  2
+`define INDEX_PX_Y  2
+`define CONV1_ADDR  9
+`define CONV1_CHANNEL_I_WIDE  8
+`define CONV1_CHANNEL_O_WIDE  7
+`define CONV1_PX_X_WIDE  2
+`define CONV1_PX_Y_WIDE  2
+`define RELATIVE_POS  4
+`define CONV1_PX_X_WIDE_  2
+`define CONV1_PX_Y_WIDE_  2
+`define CONV1_WEIGHT_ADDR  18
+`define CONV1_MP_ADDR  9
