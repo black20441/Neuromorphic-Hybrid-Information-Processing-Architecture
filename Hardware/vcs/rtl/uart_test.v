@@ -26,9 +26,8 @@ localparam OVER3 = 3'd7;
 //reg
 reg    [2 : 0]                         current_state;
 reg    [2 : 0]                         next_state;
-reg    [11 : 0]                        cnt_wait;   //2604个周期 25MHZ
-
-reg    [6 : 0]                         cnt_data;  //1024个数据为一个timestep
+reg    [11 : 0]                        cnt_wait;   
+reg    [6 : 0]                         cnt_data;  
 
 //state machine: process1
 always @(posedge clk or negedge rstn) begin

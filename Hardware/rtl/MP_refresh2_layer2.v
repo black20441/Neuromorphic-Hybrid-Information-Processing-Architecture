@@ -24,7 +24,7 @@ module MP_refresh_layer2 #(
 
 //MP_bram_port_r
 wire     signed [`MP_WIDE-1 : 0]         mp_r;
-// mp_addr_r=channel_num
+
 
 //MP_bram_port_w
 reg [`MP_ADDR-1 : 0]         mp_addr_w_reg;
@@ -36,12 +36,11 @@ wire mp_w_en;
 reg mp_ready_reg;
 //reg
 
-    reg    signed    [`MP_WIDE-1 : 0]         mp_reg;
-    // reg        [`MP_WIDE-1 : 0]         threshold;
-    reg output_num_switch_pe_reg;
-    reg output_num_switch_pe_reg2;
-    reg [3:0]   timestep_num;
-//    reg [`SYNAPSE_INDEX-1 : 0]   neuron_buffer  [1:0];
+reg    signed    [`MP_WIDE-1 : 0]         mp_reg;
+reg output_num_switch_pe_reg;
+reg output_num_switch_pe_reg2;
+reg [3:0]   timestep_num;
+
    
 wire                                 spike;
 wire                             mp_start;
@@ -59,9 +58,7 @@ reg write_enable_reg;
     
 assign timestep_switch_flag=((channel_num==0)&&(output_num_switch_pe_reg==1'b1))?1'b1:1'b0;  
 
-// assign mp_addr_r=channel_num;
 assign mp_w_en=(output_num_switch_pe_reg==1'b1)?1'b1:1'b0;
-// assign mp_addr_w=mp_addr_w_reg;
 
 assign spike=(output_num_switch_pe_reg!=1'b1)?1'b0:(mp_reg<=THRESHOLD)?1'b0:1'b1;
 assign mp_w=(output_num_switch_pe_reg!=1'b1)?1'b0:(mp_reg<=THRESHOLD)?mp_reg:MP_RESET;
@@ -94,28 +91,7 @@ begin
     else
     timestep_num<=timestep_num;
     end
-//    reg        [`INDEX_PIC-1 : 0]       pic_num;
-//    reg        [`INDEX_PX-1 : 0]        pic_index;
-//    reg                                 pic_valid;
-//    reg        [`INDEX_PX_WIDE-1 : 0]   pic_index_x;
-//    reg        [`INDEX_PX_WIDE-1 : 0]   pic_index_y;
-//    reg                                 pic_pos_valid;
 
-//mp_refresh
-//always @(posedge clk or negedge rstn) begin
-//    if (!rstn) begin
-//        mp_refresh_reg <= 1'b0;
-//    end
-//    else if ((current_state == FIRE)&&(spike == 1'b1))
-//    begin
-//         mp_refresh_reg <= 1'b1;
-//    end
-//    else if (current_state == IDLE) begin
-//        mp_refresh_reg <= 1'b0;
-//    end
-//    else
-//        mp_refresh_reg <= mp_refresh_reg;
-//end
 
 
 always @(posedge clk or negedge rstn) begin
@@ -219,22 +195,22 @@ end
 
 always @(posedge clk) begin
     case(next_state)
-        IDLE: begin // ��ʼ״̬
+        IDLE: begin 
             write_enable_reg <= 1'b0;
             output_data <= 8'b0;
             pause<=1'b0;
         end
 
-        START: begin // timestep_switch_flagΪ1״̬
-            write_enable_reg <= 1; // дʹ������
-            output_data <= 16'hf1fa; // ��дһ��ʱ�ӵ�f1fa
+        START: begin 
+            write_enable_reg <= 1; 
+            output_data <= 16'hf1fa; 
         end
-        WRITE: begin // spike�ߵ�ƽ״̬
+        WRITE: begin 
             if (spike) begin
-                write_enable_reg <= 1'b1; // spike�ߵ�ƽʱдʹ������
-                output_data <= mp_addr_w_reg; // �������Ϊmp_addr_w_reg
+                write_enable_reg <= 1'b1; 
+                output_data <= mp_addr_w_reg; 
             end else begin
-                write_enable_reg <= 1'b0; // ���spike��͵�ƽ�����س�ʼ״�?
+                write_enable_reg <= 1'b0; 
                 output_data<=output_data;
             end
         end
@@ -243,8 +219,8 @@ always @(posedge clk) begin
             if(spike==1'b1)
             begin
                 pause<=1'b1;
-            write_enable_reg <= 1; // дʹ������
-            output_data <= mp_addr_w_reg; // ��дһ��ʱ�ӵ�faf1
+            write_enable_reg <= 1; 
+            output_data <= mp_addr_w_reg; 
             end
             else 
             begin
@@ -254,21 +230,11 @@ always @(posedge clk) begin
 
         end
         end
-        default: current_state <= IDLE; // Ĭ�Ϸ��س�ʼ״̬
+        default: current_state <= IDLE; 
     endcase
 end
  
-    
 
-// mp_refresh_ram_1 mp_refresh_ram_layer2(
-//     .clka(clk),
-//     .wea(mp_w_en),
-//     .addra(mp_addr_w_reg),
-//     .dina(mp_w),
-//     .clkb(clk),
-//     .addrb(channel_num),
-//     .doutb(mp_r)
-//     );
 bram
 #(
   .ADDR (9),
@@ -284,12 +250,5 @@ mp_refresh_ram_layer2(
     .addrb({2'b0,channel_num}),
     .doutb(mp_r)
     );
-    
-//        sync_fifo endfifo1 (
-//    .clk(clk),
-//    .rstn(rstn),
-//    .wr_en(neuron_valid),
-//    .wr_data(neuron),
-//    .rd_en(1'b0)
-//    );
+
 endmodule //MP_refresh

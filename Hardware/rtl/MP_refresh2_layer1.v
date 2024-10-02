@@ -94,28 +94,6 @@ begin
     else
     timestep_num<=timestep_num;
     end
-//    reg        [`INDEX_PIC-1 : 0]       pic_num;
-//    reg        [`INDEX_PX-1 : 0]        pic_index;
-//    reg                                 pic_valid;
-//    reg        [`INDEX_PX_WIDE-1 : 0]   pic_index_x;
-//    reg        [`INDEX_PX_WIDE-1 : 0]   pic_index_y;
-//    reg                                 pic_pos_valid;
-
-//mp_refresh
-//always @(posedge clk or negedge rstn) begin
-//    if (!rstn) begin
-//        mp_refresh_reg <= 1'b0;
-//    end
-//    else if ((current_state == FIRE)&&(spike == 1'b1))
-//    begin
-//         mp_refresh_reg <= 1'b1;
-//    end
-//    else if (current_state == IDLE) begin
-//        mp_refresh_reg <= 1'b0;
-//    end
-//    else
-//        mp_refresh_reg <= mp_refresh_reg;
-//end
 
 
 always @(posedge clk or negedge rstn) begin
@@ -218,22 +196,22 @@ end
 
 always @(posedge clk) begin
     case(next_state)
-        IDLE: begin // ��ʼ״̬
+        IDLE: begin 
             write_enable_reg <= 1'b0;
             output_data <= 8'b0;
             pause<=1'b0;
         end
 
-        START: begin // timestep_switch_flagΪ1״̬
-            write_enable_reg <= 1; // дʹ������
-            output_data <= 16'hf1fa; // ��дһ��ʱ�ӵ�f1fa
+        START: begin 
+            write_enable_reg <= 1; 
+            output_data <= 16'hf1fa; 
         end
-        WRITE: begin // spike�ߵ�ƽ״̬
+        WRITE: begin 
             if (spike) begin
-                write_enable_reg <= 1'b1; // spike�ߵ�ƽʱдʹ������
-                output_data <= mp_addr_w_reg; // �������Ϊmp_addr_w_reg
+                write_enable_reg <= 1'b1; 
+                output_data <= mp_addr_w_reg; 
             end else begin
-                write_enable_reg <= 1'b0; // ���spike��͵�ƽ�����س�ʼ״�?
+                write_enable_reg <= 1'b0; 
                 output_data<=output_data;
             end
         end
@@ -242,8 +220,8 @@ always @(posedge clk) begin
             if(spike==1'b1)
             begin
                 pause<=1'b1;
-            write_enable_reg <= 1; // дʹ������
-            output_data <= mp_addr_w_reg; // ��дһ��ʱ�ӵ�faf1
+            write_enable_reg <= 1; 
+            output_data <= mp_addr_w_reg; 
             end
             else 
             begin
@@ -253,21 +231,12 @@ always @(posedge clk) begin
 
         end
         end
-        default: current_state <= IDLE; // Ĭ�Ϸ��س�ʼ״̬
+        default: current_state <= IDLE; 
     endcase
 end
  
     
 
-// mp_refresh_ram_0 mp_refresh_ram_layer1(
-//     .clka(clk),
-//     .wea(mp_w_en),
-//     .addra(mp_addr_w_reg),
-//     .dina(mp_w),
-//     .clkb(clk),
-//     .addrb(channel_num),
-//     .doutb(mp_r)
-//     );
 
 bram
 #(
@@ -285,11 +254,4 @@ mp_refresh_ram_layer1(
     .doutb(mp_r)
     );
 
-//        sync_fifo endfifo1 (
-//    .clk(clk),
-//    .rstn(rstn),
-//    .wr_en(neuron_valid),
-//    .wr_data(neuron),
-//    .rd_en(1'b0)
-//    );
 endmodule //MP_refresh

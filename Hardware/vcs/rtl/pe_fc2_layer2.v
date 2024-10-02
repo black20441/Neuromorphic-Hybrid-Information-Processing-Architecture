@@ -12,26 +12,16 @@ module pe_fc_layer2
     input                 [`SYNAPSE_INDEX-1 : 0] s_index_ram               ,//16
     input                [`CONV1_ADDR-1 : 0]    addr_most                  ,
     input                                    s_index_valid                  ,//addr_valid
-    // input                [`CHANNEL_WIDE-1 : 0]   cnt_channel                ,
     output                                   weight_ready,
-// //FC_RAM_controller
-//     input                               s_index_valid              ,
-//     input       [`SYNAPSE_INDEX-1 : 0]  s_index_pe                 ,
-//     input       [`CHANNEL_WIDE-1 : 0]   cnt_channel                ,
-//     input                               channel_switch_ram         ,
-//     output  reg                         weight_ready               ,
-
-
 
 //MP_refresh
     output       [`MP_WIDE-1 : 0]        mp_out                     ,
     output                              output_num_switch_pe,
-    output       [`CHANNEL_WIDE-1:0] channel_num,        //输入通道
-    output                           mp_ready,//channel_�?�?信号,
+    output       [`CHANNEL_WIDE-1:0] channel_num,      
+    output                           mp_ready,
 
     output                           ram_release                
 );
-// channel_num和mp_refresh待改
 
 //localparam
 localparam IDLE = 2'd0;
@@ -69,7 +59,6 @@ reg                 ram_release_reg;
 
 reg [`WEIGHT_BRAM-1 : 0]       weight_bram_addr_reg;
 
-//reg mp_ready_reg;
 reg weight_ready_reg;
 reg weight_ready_reg2;
 reg weight_ready_reg3;
@@ -86,7 +75,7 @@ reg  [`CHANNEL_WIDE-1:0] channel_num_reg4;
 
 
 assign mp_ready=weight_ready;
-assign channel_num=channel_num_reg4;//mp_out
+assign channel_num=channel_num_reg4;
 assign ram_release=ram_release_reg;
 
 assign weight_ready=weight_ready_reg4? 1'b1:1'b0;
@@ -139,7 +128,7 @@ if (!rstn)
 weight_o<= {`WEIGHT_WIDE{1'b0}};
         else 
         begin
-                case (weight_index_i)//会不会慢�???????????拍？�???????????
+                case (weight_index_i)
                     4'd0: weight_o <= weight1;
                     4'd1: weight_o <= weight2;
                     4'd2: weight_o <= weight3;
@@ -252,51 +241,17 @@ always @(posedge clk or negedge rstn)  begin
 if (!rstn)
 begin
         ram_release_reg<=1'b0;
-//        mp_ready_reg<=1'b0;
 end
 else    if((channel_num_reg==(OUTPUT_CHANNEL_NUM-1'b1))&&(addr_most_cnt==addr_most))
 begin
         ram_release_reg<=1'b1;
-//        mp_ready_reg<=1'b1;
 end
 else 
 begin
         ram_release_reg<=1'b0;    
-//        mp_ready_reg<=1'b0;
+end
 end
 
-end
-
-
-//always @(posedge clk or negedge rstn)  begin
-//if (!rstn)
-//begin
-//        ram_release_reg<=1'b1;
-////        mp_ready_reg<=1'b0;
-//end
-//else    if((channel_num_reg==(OUTPUT_CHANNEL_NUM-1'b1))&&(addr_most_cnt==addr_most))
-//begin
-//        ram_release_reg<=1'b1;
-////        mp_ready_reg<=1'b1;
-//end
-//else if(s_index_valid==1'b1)
-//begin
-//        ram_release_reg<=1'b0;    
-////        mp_ready_reg<=1'b0;
-//end
-//else 
-//    ram_release_reg<=ram_release_reg;
-
-//end
-
-
-
-// pe_fc_ram_1  pe_fc_ram_layer2(
-//     .clka(clk),
-//     .addra(weight_bram_addr_reg),
-//     .douta(weight_index_i),
-//     .wea(1'b0)
-//     );
 
 single_bram2 u_single_bram2(
     .clkb(clk),

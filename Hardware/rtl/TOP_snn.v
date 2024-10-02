@@ -5,10 +5,6 @@ module TOP_snn (
     input                               clk                        ,
     input                               rstn                       ,
 
-//test ram
-//    output  reg [9 : 0]                 addr_test_ram              ,
-//    input       [7 : 0]                 spike                      ,
-
 //next fifo
     input                               almost_full                ,
     input                               full                       ,
@@ -51,8 +47,6 @@ wire                                    r_en_2                     ;
 wire         [15 : 0]                   fc_rd_data                 ;
 wire                                    empty_2                    ;
 wire                                    almost_empty_2             ;
-// wire                                    almost_empty_out1          ;
-// wire                                    fifo_empty_out1            ;
 
 //wire fc
 wire                                    w_en_out                   ;
@@ -63,13 +57,13 @@ wire         [15 : 0]                   s_index_o_out              ;
 
 test_ram u_test_ram
 (
-  .clka(clk),    // input wire clka
-  .wea(wea),      // input wire [0 : 0] wea
-  .addra(addra),  // input wire [9 : 0] addra
-  .dina(dina),    // input wire [7 : 0] dina
-  .clkb(clk),    // input wire clkb
-  .addrb(addr_test_ram),  // input wire [9 : 0] addrb
-  .doutb(spike )  // output wire [7 : 0] doutb
+  .clka(clk),    
+  .wea(wea),      
+  .addra(addra),  
+  .dina(dina),    
+  .clkb(clk),    
+  .addrb(addr_test_ram),  
+  .doutb(spike )  
 );
 
 uart_test u_uart_test(
@@ -121,14 +115,6 @@ TOP_conv u_TOP_conv(
 );
 
 
-// TOP_conv u_TOP_conv(
-//     .clk         (clk         ),
-//     .rstn        (rstn        ),
-//     .almost_full (almost_full_i),
-//     .full        (full_i      ),
-//     .w_en        (w_en_i      ),
-//     .s_index_o   (s_index_o_i )
-// );
 
 sync_fifo_layer1 #(
     .WIDTH(16),
@@ -137,9 +123,9 @@ sync_fifo_layer1 #(
 ) sync_fifo_layer1_inst (
     .clk(clk),
     .rstn(rstn),
-    .wr_en(w_en_2),//write_in_en_1
+    .wr_en(w_en_2),
     .wr_data(s_index_o_2),
-    .rd_en(r_en_2),// ??
+    .rd_en(r_en_2),
     .rd_data(fc_rd_data),
 
     .fifo_full(full_2),
@@ -159,19 +145,6 @@ TOP_fc u_TOP_fc(
     .w_en              (w_en              ),
     .s_index_o         (s_index_o         )
 );
-
-
-// TOP_fc u_TOP_fc(
-//     .clk         (clk         ),
-//     .rstn        (rstn        ),
-//     .s_index_i   (s_index_o_i  ),
-//     .write_in_en (w_en_i      ),
-//     .almost_full (almost_full ),
-//     .full        (full        ),
-//     .w_en        (w_en        ),
-//     .s_index_o   (s_index_o   )
-// );
-
 
 
 endmodule //TOP

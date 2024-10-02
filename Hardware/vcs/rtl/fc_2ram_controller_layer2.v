@@ -12,7 +12,6 @@ module fc_2ram_controller_layer2 (
     output                           r_en                       ,
 
 //fc
-//    input        [`CONV1_ADDR-1 : 0]    addr_r_spike               ,//9
     output    [`SYNAPSE_INDEX-1 : 0] s_index_ram                ,//16
     output    [`CONV1_ADDR-1 : 0]    addr_most                  ,
     output                           addr_valid                 ,
@@ -41,9 +40,7 @@ reg                [`CONV1_ADDR-1 : 0]   ram2_addr_r               ;
 reg                [`CONV1_ADDR-1 : 0]   ram2_addr_w               ;
 reg                [`CONV1_ADDR-1 : 0]   ram2_addr_w_reg           ;
 reg                [`SYNAPSE_INDEX-1 : 0]ram1_data_in              ;
-// reg                [`SYNAPSE_INDEX-1 : 0]ram1_data_out             ;
 reg                [`SYNAPSE_INDEX-1 : 0]ram2_data_in              ;
-// reg                [`SYNAPSE_INDEX-1 : 0]ram2_data_out             ;
 reg                                      ram1_w_en                 ;
 reg                                      ram2_w_en                 ;
 reg                                      ram1_valid                ;
@@ -77,17 +74,6 @@ always @(posedge clk or negedge rstn) begin
     end
     
     
-//always @(posedge clk or negedge rstn) begin
-//    if (!rstn) begin
-//                   ram1_addr_w_reg<={`CONV1_ADDR{1'b0}};
-//                   ram2_addr_w_reg<={`CONV1_ADDR{1'b0}};
-//                   end
-//      else
-//      begin
-//          ram1_addr_w_reg<=ram1_addr_w;
-//          ram2_addr_w_reg<=ram2_addr_w;
-//              end
-// end 
     
 always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
@@ -136,7 +122,7 @@ always @(*) begin
         IDLE_R: 
         begin
             if (ram1_valid == 1'b1) begin
-                next_state_r = RAM1_R;//锛燂紵锛�?????? �??????�??????
+                next_state_r = RAM1_R;
                
             end
             else
@@ -146,7 +132,6 @@ always @(*) begin
         begin
             if ((ram2_valid == 1'b1)&&(ram_release == 1'b1)) begin
                 next_state_r = RAM2_R;
-//                ram1_addr_w_reg<={`CONV1_ADDR{1'b0}};
             end
             else
                 next_state_r = RAM1_R;
@@ -155,7 +140,6 @@ always @(*) begin
         begin
             if ((ram1_valid == 1'b1)&&(ram_release == 1'b1)) begin
                 next_state_r = RAM1_R;
-//                ram2_addr_w_reg<={`CONV1_ADDR{1'b0}};
             end
             else
                 next_state_r = RAM2_R;
@@ -173,8 +157,6 @@ always @(posedge clk or negedge rstn) begin
         input_num_switch_pe<=1'b0;
     end
     else begin
-//    if(almost_empty==1'b1)
-//    begin
         case (next_state_r)
             IDLE_R:
             begin
@@ -215,9 +197,7 @@ always @(posedge clk or negedge rstn) begin
             end
             default: ;
         endcase
-        end
-//    end
-        
+        end   
 end
 
 //state machine2_w: process 1
@@ -235,7 +215,7 @@ always @(*) begin
     case (current_state)
         IDLE:
         begin
-            if (empty != 1'b1) begin//FIFO绌虹殑鏍�?淇�??�彿锛屼负�?��?�數骞虫椂琛ㄧずFIFO宸茬┖锛屼笉鑳藉�?杩涜璇绘搷浣溿��???????
+            if (empty != 1'b1) begin
                 next_state = RAM1;
             end
             else
@@ -245,7 +225,7 @@ always @(*) begin
         begin
       
         
-          if ((s_index_i == 16'hFaF1)&&(ram1_valid == 1'b1)) begin//h Faf1 缁撴�?????? f1fa�?�濮�?
+          if ((s_index_i == 16'hFaF1)&&(ram1_valid == 1'b1)) begin
                next_state = RAM2;
             end
             
@@ -278,8 +258,6 @@ always @(posedge clk or negedge rstn) begin
         ram2_data_in <= {`SYNAPSE_INDEX{1'b0}};
     end
     else begin
-//    if(almost_empty==1'b1)
-//    begin
         case (next_state)
             IDLE:
             begin
@@ -295,9 +273,9 @@ always @(posedge clk or negedge rstn) begin
             end
             RAM1:
             begin
-                if (((s_index_i == 16'hF1Fa)&&({ram1_valid,ram2_valid} != 2'b11))||//h Faf1 缁撴�?????? f1fa�?�濮�?
+                if (((s_index_i == 16'hF1Fa)&&({ram1_valid,ram2_valid} != 2'b11))||
                 (s_index_i == 16'hF1FA)&&
-                ({ram1_valid,ram2_valid} == 2'b11)&&(ram_release == 1'b1)) begin  //锛燂紵锛燂紵
+                ({ram1_valid,ram2_valid} == 2'b11)&&(ram_release == 1'b1)) begin  
                     r_en_reg <= 1'b1;
                     ram1_w_en <= 1'b0;
                     ram1_valid <= 1'b0;
@@ -318,7 +296,7 @@ always @(posedge clk or negedge rstn) begin
                     ram1_w_en <= 1'b0;
                     ram1_valid <= 1'b1;
                     ram1_addr_w <= ram1_addr_w;
-                    ram1_data_in <= ram1_data_in;//�??????�??????
+                    ram1_data_in <= ram1_data_in;
                 end
                 else begin
                     r_en_reg <= 1'b0;
@@ -367,25 +345,7 @@ always @(posedge clk or negedge rstn) begin
     end
 end
 
-// blk_mem_gen_1 ram1_layer2 (
-//   .clka(clk),    // input wire clka
-//   .wea(ram1_w_en),      // input wire [1 : 0] wea
-//   .addra(ram1_addr_w_reg),  // input wire [6 : 0] addra
-//   .dina(ram1_data_in),    // input wire [15 : 0] dina
-//   .clkb(clk),    // input wire clkb
-//   .addrb(ram1_addr_r),  // input wire [6 : 0] addrb
-//   .doutb(ram1_data_out_wire)  // output wire [15 : 0] doutb
-// );
 
-// blk_mem_gen_1 ram2_layer2 (
-//   .clka(clk),    // input wire clka
-//   .wea(ram2_w_en),      // input wire [1 : 0] wea
-//   .addra(ram2_addr_w_reg),  // input wire [6 : 0] addra
-//   .dina(ram2_data_in),    // input wire [15 : 0] dina
-//   .clkb(clk),    // input wire clkb
-//   .addrb(ram2_addr_r),  // input wire [6 : 0] addrb
-//   .doutb(ram2_data_out_wire)  // output wire [15 : 0] doutb
-// );
 bram
 #(
   .ADDR (9),
@@ -393,13 +353,13 @@ bram
   .DEPTH (512)
 ) 
 ram1_layer1 (
-  .clka(clk),    // input wire clka
-  .wea(ram1_w_en),      // input wire [1 : 0] wea
-  .addra(ram1_addr_w_reg),  // input wire [6 : 0] addra
-  .dina(ram1_data_in),    // input wire [15 : 0] dina
-  .clkb(clk),    // input wire clkb
-  .addrb(ram1_addr_r),  // input wire [6 : 0] addrb
-  .doutb(ram1_data_out_wire)  // output wire [15 : 0] doutb
+  .clka(clk),   
+  .wea(ram1_w_en),      
+  .addra(ram1_addr_w_reg),  
+  .dina(ram1_data_in),    
+  .clkb(clk),    
+  .addrb(ram1_addr_r),  
+  .doutb(ram1_data_out_wire)  
 );
 
 bram
@@ -409,13 +369,13 @@ bram
   .DEPTH (512)
 ) 
 ram1_layer2 (
-  .clka(clk),    // input wire clka
-  .wea(ram1_w_en),      // input wire [1 : 0] wea
-  .addra(ram1_addr_w_reg),  // input wire [6 : 0] addra
-  .dina(ram1_data_in),    // input wire [15 : 0] dina
-  .clkb(clk),    // input wire clkb
-  .addrb(ram1_addr_r),  // input wire [6 : 0] addrb
-  .doutb(ram1_data_out_wire)  // output wire [15 : 0] doutb
+  .clka(clk),    
+  .wea(ram1_w_en),      
+  .addra(ram1_addr_w_reg),  
+  .dina(ram1_data_in),    
+  .clkb(clk),    
+  .addrb(ram1_addr_r), 
+  .doutb(ram1_data_out_wire)  
 );
 
 assign s_index_ram=(current_state_r==IDLE)?{`SYNAPSE_INDEX{1'b0}}:

@@ -16,14 +16,12 @@ module local_position
 
 //localpara
 localparam IDLE = 2'd0;
-//localparam INIT = 2'd1;
 localparam PIC_INDEX  = 2'd1;
 localparam WIRTEBACK  = 2'd2;
 
 //reg
 reg                    [1 : 0]           pic_pos_current_state     ;
 reg                    [1 : 0]           pic_pos_next_state        ;
-//reg                    [`INDEX_PX-1 : 0] pic_index_reg             ;
 
 //state machine: process 1
 always @(posedge clk or negedge rstn) begin

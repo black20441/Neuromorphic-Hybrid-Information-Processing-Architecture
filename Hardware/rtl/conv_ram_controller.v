@@ -278,21 +278,6 @@ always @(posedge clk or negedge rstn) begin
     end
 end
 
-// blk_conv1_mem_gen_1 conv1_ram1 (
-//   .clka(clk),    // input wire clka
-//   .wea(ram1_w_en),      // input wire [0 : 0] wea
-//   .addra(ram1_addr_w),  // input wire [8 : 0] addra
-//   .dina(ram1_data_in),    // input wire [15 : 0] dina
-//   .clkb(clk),    // input wire clkb
-//   .addrb(ram1_addr_r),  // input wire [8 : 0] addrb
-//   .doutb(ram1_data_out)  // output wire [15 : 0] doutb
-// );
-////////////////
-//#(
-//   .ADDR (),
-//   .WIDE (),
-//   .DEPTH ()
-// ) 
 
 bram
 #(
@@ -301,13 +286,13 @@ bram
   .DEPTH (512)
 ) 
 conv1_ram1 (
-  .clka(clk),    // input wire clka
-  .wea(ram1_w_en),      // input wire [0 : 0] wea
-  .addra(ram1_addr_w),  // input wire [8 : 0] addra
-  .dina(ram1_data_in),    // input wire [15 : 0] dina
-  .clkb(clk),    // input wire clkb
-  .addrb(ram1_addr_r),  // input wire [8 : 0] addrb
-  .doutb(ram1_data_out)  // output wire [15 : 0] doutb
+  .clka(clk),    
+  .wea(ram1_w_en),      
+  .addra(ram1_addr_w),  
+  .dina(ram1_data_in),    
+  .clkb(clk),    
+  .addrb(ram1_addr_r),  
+  .doutb(ram1_data_out)  
 );
 
 bram
@@ -317,22 +302,14 @@ bram
   .DEPTH (512)
 ) 
 conv1_ram2 (
-  .clka(clk),    // input wire clka
-  .wea(ram1_w_en),      // input wire [0 : 0] wea
-  .addra(ram1_addr_w),  // input wire [8 : 0] addra
-  .dina(ram1_data_in),    // input wire [15 : 0] dina
-  .clkb(clk),    // input wire clkb
-  .addrb(ram1_addr_r),  // input wire [8 : 0] addrb
-  .doutb(ram1_data_out)  // output wire [15 : 0] doutb
+  .clka(clk),    
+  .wea(ram1_w_en),      
+  .addra(ram1_addr_w),  
+  .dina(ram1_data_in),    
+  .clkb(clk),    
+  .addrb(ram1_addr_r),  
+  .doutb(ram1_data_out)  
 );
-// blk_conv1_mem_gen_1 conv2_ram2 (
-//   .clka(clk),    // input wire clka
-//   .wea(ram2_w_en),      // input wire [0 : 0] wea
-//   .addra(ram2_addr_w),  // input wire [8 : 0] addra
-//   .dina(ram2_data_in),    // input wire [15 : 0] dina
-//   .clkb(clk),    // input wire clkb
-//   .addrb(ram2_addr_r),  // input wire [8 : 0] addrb
-//   .doutb(ram2_data_out)  // output wire [15 : 0] doutb
-// );
+
 
 endmodule //conv_ram_controller

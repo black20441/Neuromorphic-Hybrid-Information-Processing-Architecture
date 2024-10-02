@@ -8,9 +8,6 @@ module conv1 #(
     input                               clk                        ,
     input                               rstn                       ,
 
-//controller
-//   input        [1 : 0]                timestep_switch            ,
-
 //conv_ram_controller
     input        [`CONV1_ADDR-1 : 0]    addr_most                  ,
     input                               spike_valid                ,
@@ -76,7 +73,6 @@ wire                              dina                      ;
 //localparam
 localparam IDLE = 2'd0;
 localparam RAM = 2'd1;   //fetch the AER to PE
-//localparam WAIT = 3'd2;
 localparam PX_SEARCH = 2'd2;   
 localparam OVER = 2'd3; 
 
@@ -86,13 +82,7 @@ reg  [1 : 0]                            next_state                 ;
 
 reg  [6 : 0]                            cnt_channel                ;
 
-//wire
-// wire [`CONV1_MP_ADDR-1 : 0]             mp_addr_r                  ;
-// wire [`MP_WIDE-1 : 0]                   mp                         ;
-// wire [`CONV1_MP_ADDR-1 : 0]             mp_addr_w                  ;
-// wire [`MP_WIDE-1 : 0]                   mp_w                       ;
-// wire                                    mp_w_en                    ;
-// 
+ 
 //state machine: process 1
 always @(posedge clk or negedge rstn) begin
     if (!rstn) begin
@@ -223,19 +213,7 @@ valid_pixel_search u_valid_pixel_search(
     .almost_full     (almost_full_     )
 );
 
-/*
-fifo_conv_pos fifo (
-  .clk(clk),                    // input wire clk
-  .srst(rstn),                  // input wire srst
-  .din(valid_pix_pos),                    // input wire [15 : 0] din
-  .wr_en(w_en_),                // input wire wr_en
-  .rd_en(r_en),                // input wire rd_en
-  .dout(valid_pix_pos_i),                  // output wire [15 : 0] dout
-  .full(full_),                  // output wire full
-  .almost_full(almost_full_),    // output wire almost_full
-  .empty(empty),                // output wire empty
-  .almost_empty(almost_empty)  // output wire almost_empty
-); */
+
 
 sync_fifo2 #(.WIDTH          (23),
   .DEPTH          (1024),
@@ -272,25 +250,16 @@ conv1_weight_search2 u_conv1_weight_search(
     .MP_valid        (MP_valid        )
 );
 
-// blk_mem_weight weight_ram (
-//   .clka(clk),    // input wire clka
-//   .wea(wea),      // input wire [0 : 0] wea
-//   .addra(addra),  // input wire [16 : 0] addra
-//   .dina(dina),    // input wire [3 : 0] dina
-//   .clkb(clk),    // input wire clkb
-//   .addrb(addr_r_weight),  // input wire [16 : 0] addrb
-//   .doutb(weight_index)  // output wire [3 : 0] doutb
-// );
 
 
 weight_ram weight_ram(
-  .clka(clk),    // input wire clka
-  .wea(wea),      // input wire [0 : 0] wea
-  .addra(addra),  // input wire [16 : 0] addra
-  .dina(dina),    // input wire [3 : 0] dina
-  .clkb(clk),    // input wire clkb
-  .addrb(addr_r_weight),  // input wire [16 : 0] addrb
-  .doutb(weight_index)  // output wire [3 : 0] doutb
+  .clka(clk),    
+  .wea(wea),      
+  .addra(addra),  
+  .dina(dina),    
+  .clkb(clk),    
+  .addrb(addr_r_weight),  
+  .doutb(weight_index)  
 );
 
 MP_refresh_conv1 u_MP_refresh_conv1(
@@ -321,15 +290,7 @@ always @(*) begin
         s_index_o = s_index_conv1 - 1;
 end  
 
-// blk_mem_conv_mp conv_mp (
-//   .clka(clk),    // input wire clka
-//   .wea(mp_w_en),      // input wire [0 : 0] wea
-//   .addra(mp_addr_w),  // input wire [8 : 0] addra
-//   .dina(mp_w),    // input wire [16 : 0] dina
-//   .clkb(clk),    // input wire clkb
-//   .addrb(mp_addr_r),  // input wire [8 : 0] addrb
-//   .doutb(mp)  // output wire [16 : 0] doutb
-// );
+
 bram
 #(
   .ADDR (9),
@@ -337,13 +298,13 @@ bram
   .DEPTH (16384)
 ) 
 conv_mp (
-  .clka(clk),    // input wire clka
-  .wea(mp_w_en),      // input wire [0 : 0] wea
-  .addra(mp_addr_w),  // input wire [8 : 0] addra
-  .dina(mp_w),    // input wire [16 : 0] dina
-  .clkb(clk),    // input wire clkb
-  .addrb(mp_addr_r),  // input wire [8 : 0] addrb
-  .doutb(mp)  // output wire [16 : 0] doutb
+  .clka(clk),    
+  .wea(mp_w_en),      
+  .addra(mp_addr_w),  
+  .dina(mp_w),    
+  .clkb(clk),    
+  .addrb(mp_addr_r),  
+  .doutb(mp) 
 );
 
 endmodule

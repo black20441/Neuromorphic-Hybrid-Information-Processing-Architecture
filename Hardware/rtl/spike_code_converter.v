@@ -19,7 +19,6 @@ module spike_code_converter (
     output reg         [1 : 0]          timestep_switch             //10 start ,11 end
 );
 
-    // parameter                           coding_style = 1           ;//0 AER ,1 bit
 
 //localpara
 localparam IDLE = 2'd0;
@@ -251,24 +250,6 @@ AER_coding u_AER_coding(
     .AER_index_position (AER_index_position ),
     .AER_position_valid (AER_position_valid )
 );
-
-
-//************************************
-/*/FIFO
-always @(posedge clk or negedge rstn) begin
-    if (!rstn) begin
-        w_en <= 1'b0;
-        s_index <= 16'b0;
-    end
-    else if (coding_style == 1'b0) begin
-        s_index <= s_index_reg;
-        w_en <= 1'b1;
-    end
-    else if (coding_style == 1'b1) begin
-        
-    end
-end */
-
 
 
 endmodule //controller

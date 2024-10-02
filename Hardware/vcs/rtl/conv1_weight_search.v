@@ -31,20 +31,13 @@ parameter CONV1_CHANNEL_NUM_I = 256)
     output reg                                      MP_valid             
 );
 
-//localparam
-// localparam IDLE = 3'd0;
-// localparam INIT = 3'd1;
-// localparam READ = 3'd2;
-// localparam ADDR = 3'd3;
-// localparam MP   = 3'd4;
+
 
 //parameter
 parameter kernel_size = 4;
 
 
 //reg
-// reg [2 : 0]                                 current_state;
-// reg [2 : 0]                                 next_state;
 reg [(`CONV1_CHANNEL_I_WIDE+`RELATIVE_POS+`CONV1_CHANNEL_O_WIDE+`CONV1_PX_X_WIDE_+`CONV1_PX_Y_WIDE_- 1) : 0] valid_pix_pos_i_reg;
 reg [`CONV1_CHANNEL_I_WIDE-1 : 0]           channel_i;
 reg [`CONV1_CHANNEL_O_WIDE-1 : 0]           channel_o_reg;
@@ -298,97 +291,5 @@ always @(posedge clk or negedge rstn) begin
         MP_4 <= MP_4;
     end
 end
-// //state machine: process 1
-// always @(posedge clk or negedge rstn) begin
-//     if (!rstn) begin
-//         current_state <= IDLE;
-//     end
-//     else
-//         current_state <= next_state;
-// end
-
-// //state machine: process 2
-// always @(*) begin
-//     case (current_state)
-//         IDLE:
-//         begin
-//             if (empty != 1'b1) begin
-//                 next_state = INIT;
-//             end
-//             else
-//                 next_state = IDLE;
-//         end 
-//         INIT:
-//         begin
-//             if (empty != 1'b1) begin
-//                 next_state = READ;                
-//             end
-//             else
-//                 next_state = INIT;
-//         end
-//         READ:
-//         begin
-//             next_state = ADDR;
-//         end
-//         ADDR:
-//         begin
-//             if ((weight_px != 4'd1)&&(weight_px != 4'd2)&&(weight_px != 4'd4)&&(weight_px != 4'd3)) begin
-//                 next_state = INIT;
-//             end
-//             else
-//                 next_state = MP;
-//         end
-//         MP:
-//         begin
-//             if (MP_valid == 1'b1) begin
-//                 next_state = IDLE;
-//             end
-//             else if (empty != 1'b1) begin
-//                 next_state = INIT;
-//             end
-//             else
-//                 next_state = IDLE;
-//         end
-//         default: ;
-//     endcase
-// end
-
-// //state machine: process3
-// always @(posedge clk or negedge rstn) begin
-//     if (!rstn) begin
-//         MP_1 <= {`MP_WIDE{1'b0}};
-//         MP_2 <= {`MP_WIDE{1'b0}};
-//         MP_3 <= {`MP_WIDE{1'b0}};
-//         MP_4 <= {`MP_WIDE{1'b0}};
-//         addr_r_weight <= {`CONV1_WEIGHT_ADDR{1'b0}};
-//     end
-//     else begin
-//         case (next_state)
-//             IDLE: 
-//             begin
-//                 r_en <= 1'b0;
-//                 addr_r_weight <= {`CONV1_WEIGHT_ADDR{1'b0}};
-//             end
-//             INIT:
-//             begin
-//                 r_en <= 1'b1;
-//             end
-//             READ:
-//             begin
-//                 r_en <= 1'b0;
-//             end
-//             ADDR:
-//             begin
-//                 r_en <= 1'b0;
-//                 addr_r_weight <= (kernel_size * channel_i) + (CONV1_CHANNEL_NUM_I * channel_o * 4) + weight_px - 1;
-//             end
-//             MP:
-//             begin
-//                 addr_r_weight <= addr_r_weight;
-//             end
-//             default: ;
-//         endcase
-//     end
-// end
 
 endmodule //conv1_weight_search

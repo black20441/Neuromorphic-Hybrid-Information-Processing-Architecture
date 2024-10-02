@@ -44,7 +44,6 @@ parameter kernel_size = 4;
 parameter threshold = 567;
 
 //reg 
-//reg  (F1FA,FAF1)//;
 reg           [2 : 0]                           current_state              ;
 reg           [2 : 0]                           next_state                 ;
 reg   signed  [`MP_WIDE-1 : 0]                  MP_1_reg                   ;

@@ -21,54 +21,43 @@ output                                          almost_empty
 );
 
 wire wr_en_valid;
-//reg
 reg                                             buffer;
 
-    //定义�???�?计数�?，用于判�?空�????
-    // reg [2 : 0] cnt; // $clog2(depth)=3 - 1 : 0
 
-    //定义读写地址
     reg [10 : 0] wr_ptr;
     reg [10 : 0] rd_ptr;
 
-    //定义�???�?宽度为为width，深度为depth的fifo
     reg [WIDTH - 1 : 0] fifo [DEPTH - 1 : 0]; 
 
 
 
 assign wr_en_valid = (fifo_full==1'b1)?1'b0:wr_en;
 
-    //写地�???操作
     always @ (posedge clk or negedge rstn) begin
         if(!rstn)
             wr_ptr <= 0;
-        else if(wr_en_valid && !fifo_full)    //写使能，且fifo�?写�????
+        else if(wr_en_valid && !fifo_full)    
             wr_ptr <= wr_ptr + 1;
     end
 
-    //读地�???操作
+
     always @ (posedge clk or negedge rstn) begin
         if(!rstn)
             rd_ptr <= 0;
-        // else if ((rd_data == 16'hFAF1)&&(buffer == 1'b1)) begin
-        //     rd_ptr <= rd_ptr + 1;
-        // end
-        else if(rd_en && !fifo_empty)   //读使能，且fifo不为�???
+        else if(rd_en && !fifo_empty) 
             rd_ptr <= rd_ptr + 1;
     end
 
-    //写数�???
+
     integer i;
 
     always @ (posedge clk or negedge rstn) begin
-        if(!rstn) begin //复位清空fifo
+        if(!rstn) begin 
             for(i = 0; i < DEPTH; i = i + 1)
                 fifo[i] <= 0;
         end
-        else if(wr_en_valid && !fifo_full)  //写使能时将数�?写入fifo �?�?
+        else if(wr_en_valid && !fifo_full)  
             fifo[wr_ptr] <= wr_data;
-        // else    //否则保持
-        //     fifo[wr_ptr] <= fifo[wr_ptr];
     end
 
     always @(posedge clk or negedge rstn) begin
@@ -84,37 +73,18 @@ assign wr_en_valid = (fifo_full==1'b1)?1'b0:wr_en;
     end
 
 
-
-    //读数�???
     always @ (posedge clk or negedge rstn) begin
         if(!rstn)
             rd_data <= 0;
         else if ((rd_data == 16'hFAF1)&&(buffer == 1'b1)) begin
             rd_data <= 16'hF1FA;
         end
-        else if (rd_en  && !fifo_empty) //�?�?
+        else if (rd_en  && !fifo_empty) 
             rd_data <= fifo[rd_ptr];
-        // else if ((fifo[rd_ptr] == 16'hF1FA)||(fifo[rd_ptr] == 16'hFAF1))
-        //     rd_data <= fifo[rd_ptr];    //从fifo�?读取数�????
         else
         rd_data <= rd_data;
     end
 
-    //辅助计数，用于判�?空�????
-    // always @ (posedge clk or negedge rstn) begin
-    //     if(!rstn)
-    //         cnt <= 0;
-    //     else if (wr_en && !rd_en && !fifo_full) //有效的只写入
-    //         cnt <= cnt + 1;
-    //     else if (!wr_en && rd_en && !fifo_empty) //有效的只读取
-    //         cnt <= cnt - 1;
-    //     // else 
-    //     //     cnt <= cnt;
-    // end
-
-    //空满判断
-    // assign fifo_full = (cnt == depth)? 1'b1 : 1'b0;
-    // assign fifo_empty = (cnt == 0) ? 1'b1 : 1'b0;
 
     assign fifo_full = ((wr_ptr[10] ^ rd_ptr[10]) && (wr_ptr[10 - 1 : 0] == rd_ptr[10 - 1 : 0])) ? 1'b1 : 1'b0;
     assign fifo_empty = (wr_ptr == rd_ptr) ? 1'b1 : 1'b0;
