@@ -4,10 +4,6 @@ module TOP_fc(
     input                               clk                        ,
     input                               rstn                       ,
 
-    // input      [`SYNAPSE_INDEX-1 : 0]   s_index_i                  ,
-    // input                               write_in_en                ,               
-    // input                               almost_full                ,
-    // input                               full                       ,
 //fifo
     output                              rd_en1                     ,
     input      [`SYNAPSE_INDEX-1 : 0]   rd_data_out1               ,
@@ -23,39 +19,11 @@ parameter WIDTH = 16;
 parameter DEPTH = 1024;
 parameter ADDR_WIDTH = 10;
 
-// wire  rd_en1;
-// wire  [WIDTH-1 : 0]  rd_data_out1;
-// wire                 fifo_full_out1;
-// wire                 fifo_empty_out1;
-// wire                 almost_full_out1;
-// wire                 almost_empty_out1;
 wire                 ram_release1;
-
 
 wire write_in_en_1;
 wire [WIDTH-1 : 0]  s_index_i_1;
 
-
-// assign write_in_en_1=(full==1'b1)?1'b0:write_in_en;
-// assign s_index_i_1=s_index_i;
-// 例化 sync_fifo
-// sync_fifo_layer1 #(
-//     .WIDTH(WIDTH),
-//     .DEPTH(DEPTH),
-//     .ADDR_WIDTH(ADDR_WIDTH)
-// ) sync_fifo_layer1_inst (
-//     .clk(clk),
-//     .rstn(rstn),
-//     .wr_en(write_in_en),//write_in_en_1
-//     .wr_data(s_index_i_1),
-//     .rd_en(rd_en1),// ??
-//     .rd_data(rd_data_out1),
-
-//     .fifo_full(fifo_full_out1),
-//     .fifo_empty(fifo_empty_out1),
-//     .almost_full(almost_full_out),
-//     .almost_empty(almost_empty_out1)
-// );
 
 
 wire [`SYNAPSE_INDEX-1 : 0] s_index_ram_1;
@@ -116,7 +84,7 @@ MP_refresh_layer1 #(
     .channel_num       (channel_num_1       ),
     .output_num_switch_pe (output_num_switch_pe_1),
     .neuron            (neuron_1            ),
-    .neuron_valid      (neuron_valid_1     )//标志�???????次输出成功，�??�??channel
+    .neuron_valid      (neuron_valid_1     )
 );
 
 //layer2-------------------
@@ -212,15 +180,7 @@ MP_refresh_layer2 #(
     .channel_num       (channel_num_2       ),
     .output_num_switch_pe (output_num_switch_pe_2),
     .neuron            (s_index_o            ),
-    .neuron_valid      (w_en                 )//标志�???????次输出成功，�??�??channel
+    .neuron_valid      (w_en                 )
 );
-
-
-    // assign          w_en=neuron_valid_2;              
-    // assign          s_index_o=neuron_2;  
-
-
-
-
 
 endmodule

@@ -21,7 +21,7 @@ rtl/syn_fifo2_layer1.v
 rtl/syn_fifo2_layer2.v
 rtl/syn_fifo2.v
 rtl/TOP_conv.v
-rtl/top_fc.v
+rtl/TOP_fc.v
 rtl/TOP_snn.v
 rtl/uart_test.v
 rtl/valid_pixel_search.v

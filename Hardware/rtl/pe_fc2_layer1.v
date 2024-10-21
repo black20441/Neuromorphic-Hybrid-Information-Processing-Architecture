@@ -9,9 +9,9 @@ module pe_fc_layer1
     input                               rstn                      ,
     
 //fc_2ram_controller
-    input                 [`SYNAPSE_INDEX-1 : 0] s_index_ram               ,//16
+    input                 [`SYNAPSE_INDEX-1 : 0] s_index_ram               ,
     input                [`CONV1_ADDR-1 : 0]    addr_most                  ,
-    input                                    s_index_valid                  ,//addr_valid
+    input                                    s_index_valid                 ,
     output                                   weight_ready,
 
 //MP_refresh
@@ -60,6 +60,7 @@ reg                 ram_release_reg;
 reg [`WEIGHT_BRAM-1 : 0]       weight_bram_addr_reg;
 
 //reg mp_ready_reg;
+
 reg weight_ready_reg;
 reg weight_ready_reg2;
 reg weight_ready_reg3;
@@ -73,7 +74,7 @@ reg  [`CHANNEL_WIDE-1:0] channel_num_reg4;
 
 //weight_bram_port_r
  wire   [3 : 0]                 weight_index_i             ;
-
+ wire                           weight_ready               ;
 
 assign mp_ready=weight_ready;
 assign channel_num=channel_num_reg4;//mp_out
