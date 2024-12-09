@@ -21,6 +21,7 @@ parameter ADDR_WIDTH = 10;
 
 wire                 ram_release1;
 
+
 wire write_in_en_1;
 wire [WIDTH-1 : 0]  s_index_i_1;
 
@@ -62,13 +63,13 @@ fc_2ram_controller_layer1 fc_2ram_controller_layer1_inst(
   ) u_pe_fc_layer1_inst(
     .clk                (clk                ),
     .rstn               (rstn               ),
-    .s_index_ram            (s_index_ram_1),//输入通道
-    .addr_most          (addr_most_1),//几个输入通道
-    .s_index_valid      (addr_valid_1),//读mp
-    . mp_out             (mp_out_1             ),//输出mp
+    .s_index_ram            (s_index_ram_1),
+    .addr_most          (addr_most_1),
+    .s_index_valid      (addr_valid_1),
+    . mp_out             (mp_out_1             ),
     .output_num_switch_pe   (output_num_switch_pe_1),
-    .channel_num        (channel_num_1        ),//对应输出通道
-    .mp_ready           (mp_ready_1           ),//输出mp标志
+    .channel_num        (channel_num_1        ),
+    .mp_ready           (mp_ready_1           ),
     .ram_release        (ram_release1        )
 );
 
@@ -99,10 +100,9 @@ wire                 ram_release2;
 wire                 write_in_en_2;
 wire  [WIDTH-1 : 0]  s_index_i_2;
 
-// assign write_in_en_2=(full==1'b1)?1'b0:neuron_valid_1;
 assign write_in_en_2=neuron_valid_1;
 assign s_index_i_2=neuron_1;
-// 例化 sync_fifo
+
 sync_fifo_layer2 #(
     .WIDTH(WIDTH),
     .DEPTH(DEPTH),
@@ -112,7 +112,7 @@ sync_fifo_layer2 #(
     .rstn(rstn),
     .wr_en(write_in_en_2),
     .wr_data(s_index_i_2),
-    .rd_en(rd_en2),// ??
+    .rd_en(rd_en2),
     .rd_data(rd_data_out2),
 
     .fifo_full(fifo_full_out2),
@@ -158,13 +158,13 @@ fc_2ram_controller_layer2 fc_2ram_controller_layer2_inst(
   ) u_pe_fc_layer2_inst(
     .clk                (clk                ),
     .rstn               (rstn               ),
-    .s_index_ram            (s_index_ram_2),//输入通道
-    .addr_most          (addr_most_2),//几个输入通道
-    .s_index_valid      (addr_valid_2),//读mp
-    . mp_out             (mp_out_2             ),//输出mp
+    .s_index_ram            (s_index_ram_2),
+    .addr_most          (addr_most_2),
+    .s_index_valid      (addr_valid_2),
+    . mp_out             (mp_out_2             ),
     .output_num_switch_pe   (output_num_switch_pe_2),
-    .channel_num        (channel_num_2        ),//对应输出通道
-    .mp_ready           (mp_ready_2           ),//输出mp标志
+    .channel_num        (channel_num_2        ),
+    .mp_ready           (mp_ready_2           ),
     .ram_release        (ram_release2        )
 );
 

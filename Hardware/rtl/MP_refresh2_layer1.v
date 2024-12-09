@@ -41,7 +41,6 @@ reg mp_ready_reg;
     reg output_num_switch_pe_reg;
     reg output_num_switch_pe_reg2;
     reg [3:0]   timestep_num;
-//    reg [`SYNAPSE_INDEX-1 : 0]   neuron_buffer  [1:0];
    
 wire                                 spike;
 wire                             mp_start;
@@ -59,9 +58,7 @@ reg write_enable_reg;
     
 assign timestep_switch_flag=((channel_num==0)&&(output_num_switch_pe_reg==1'b1))?1'b1:1'b0;  
 
-// assign mp_addr_r=channel_num;
 assign mp_w_en=(output_num_switch_pe_reg==1'b1)?1'b1:1'b0;
-// assign mp_addr_w=mp_addr_w_reg;
 
 assign spike=(output_num_switch_pe_reg!=1'b1)?1'b0:(mp_reg<=THRESHOLD)?1'b0:1'b1;
 assign mp_w=(output_num_switch_pe_reg!=1'b1)?1'b0:(mp_reg<=THRESHOLD)?mp_reg:MP_RESET;

@@ -12,7 +12,7 @@ module pe_fc_layer2
     input                 [`SYNAPSE_INDEX-1 : 0] s_index_ram               ,
     input                [`CONV1_ADDR-1 : 0]    addr_most                  ,
     input                                    s_index_valid                 ,
-    // output                                   weight_ready,
+    output                                   weight_ready,
 
 //MP_refresh
     output       [`MP_WIDE-1 : 0]        mp_out                     ,
@@ -67,7 +67,7 @@ reg  [`CHANNEL_WIDE-1:0] channel_num_reg;
 reg  [`CHANNEL_WIDE-1:0] channel_num_reg2;
 reg  [`CHANNEL_WIDE-1:0] channel_num_reg3;
 reg  [`CHANNEL_WIDE-1:0] channel_num_reg4;
-wire                     weight_ready    ;
+
 
 
 //weight_bram_port_r

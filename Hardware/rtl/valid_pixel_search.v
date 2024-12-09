@@ -100,28 +100,28 @@ always @(posedge clk or negedge rstn) begin
     else if ((s_index_valid == 1'b1)) begin
         case ({index_px_x,index_px_y})
             4'b0101: begin
-                valid_pix_pos_reg1 <= {s_index_conv [11 : 4],4'b0101,conv1_channel_o,4'b0101};
-                valid_pix_pos_reg2 <= {s_index_conv [11 : 4],4'b0001,conv1_channel_o,4'b1001};
-                valid_pix_pos_reg3 <= {s_index_conv [11 : 4],4'b0100,conv1_channel_o,4'b0110};
-                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b0000,conv1_channel_o,4'b1010};
-            end
-            4'b1001: begin
-                valid_pix_pos_reg1 <= {s_index_conv [11 : 4],4'b1001,conv1_channel_o,4'b0101};
-                valid_pix_pos_reg2 <= {s_index_conv [11 : 4],4'b0101,conv1_channel_o,4'b1001};
-                valid_pix_pos_reg3 <= {s_index_conv [11 : 4],4'b1000,conv1_channel_o,4'b0110};
-                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b0100,conv1_channel_o,4'b1010};
-            end
-            4'b0110: begin
-                valid_pix_pos_reg1 <= {s_index_conv [11 : 4],4'b0110,conv1_channel_o,4'b0101};
-                valid_pix_pos_reg2 <= {s_index_conv [11 : 4],4'b0010,conv1_channel_o,4'b1001};
-                valid_pix_pos_reg3 <= {s_index_conv [11 : 4],4'b0101,conv1_channel_o,4'b0110};
-                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b0001,conv1_channel_o,4'b1010};
-            end
-            4'b1010: begin
                 valid_pix_pos_reg1 <= {s_index_conv [11 : 4],4'b1010,conv1_channel_o,4'b0101};
                 valid_pix_pos_reg2 <= {s_index_conv [11 : 4],4'b0110,conv1_channel_o,4'b1001};
                 valid_pix_pos_reg3 <= {s_index_conv [11 : 4],4'b1001,conv1_channel_o,4'b0110};
-                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b0101,conv1_channel_o,4'b1010};       
+                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b0101,conv1_channel_o,4'b1010};
+            end
+            4'b1001: begin
+                valid_pix_pos_reg1 <= {s_index_conv [11 : 4],4'b1110,conv1_channel_o,4'b0101};
+                valid_pix_pos_reg2 <= {s_index_conv [11 : 4],4'b1010,conv1_channel_o,4'b1001};
+                valid_pix_pos_reg3 <= {s_index_conv [11 : 4],4'b1101,conv1_channel_o,4'b0110};
+                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b1001,conv1_channel_o,4'b1010};
+            end
+            4'b0110: begin
+                valid_pix_pos_reg1 <= {s_index_conv [11 : 4],4'b1011,conv1_channel_o,4'b0101};
+                valid_pix_pos_reg2 <= {s_index_conv [11 : 4],4'b0111,conv1_channel_o,4'b1001};
+                valid_pix_pos_reg3 <= {s_index_conv [11 : 4],4'b1010,conv1_channel_o,4'b0110};
+                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b0110,conv1_channel_o,4'b1010};
+            end
+            4'b1010: begin
+                valid_pix_pos_reg1 <= {s_index_conv [11 : 4],4'b1111,conv1_channel_o,4'b0101};
+                valid_pix_pos_reg2 <= {s_index_conv [11 : 4],4'b1011,conv1_channel_o,4'b1001};
+                valid_pix_pos_reg3 <= {s_index_conv [11 : 4],4'b1110,conv1_channel_o,4'b0110};
+                valid_pix_pos_reg4 <= {s_index_conv [11 : 4],4'b1010,conv1_channel_o,4'b1010};
             end
             default: begin
                 valid_pix_pos_reg1 <= 23'b0;
@@ -172,8 +172,8 @@ always @(*) begin
         index_px_x = s_index_conv [3 : 2];
     end
     else begin
-        index_px_y = index_px_y;
-        index_px_x = index_px_x;
+        index_px_y = 2'b0;
+        index_px_x = 2'b0;
     end
 end
 

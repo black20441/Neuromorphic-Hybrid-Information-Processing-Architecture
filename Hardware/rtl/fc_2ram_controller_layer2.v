@@ -223,9 +223,7 @@ always @(*) begin
         end
         RAM1:
         begin
-      
-        
-          if ((s_index_i == 16'hFaF1)&&(ram1_valid == 1'b1)) begin
+            if ((s_index_i == 16'hFaF1)&&(ram1_valid == 1'b1)) begin
                next_state = RAM2;
             end
             
@@ -234,7 +232,7 @@ always @(*) begin
         end
         RAM2:
         begin
-        if ((s_index_i == 16'hFaF1)&&(ram2_valid == 1'b1)) begin
+            if ((s_index_i == 16'hFaF1)&&(ram2_valid == 1'b1)) begin
                 next_state = RAM1;
             end
             else
@@ -341,7 +339,6 @@ always @(posedge clk or negedge rstn) begin
             end
             default: ;
         endcase
-//        end
     end
 end
 

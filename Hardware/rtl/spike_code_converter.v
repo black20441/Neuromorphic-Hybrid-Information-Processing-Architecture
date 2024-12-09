@@ -143,8 +143,6 @@ always @(posedge clk or negedge rstn) begin
         IDLE: 
         begin
             w_en <= 1'b0;
-            // coding_sign <= 1'b0;
-            // coding_sign_done <= 1'b0;
             s_index <= 16'b0;
             s_index_bit <= 16'b0;
             timestep_switch <= 2'b0;
@@ -185,7 +183,6 @@ always @(posedge clk or negedge rstn) begin
                     w_en <= 1'b0;
                 end
                 else begin
-                    // coding_sign_done <= 1'b0;
                     s_index <= AER_index_position;
                     w_en <= 1'b0;
                 end

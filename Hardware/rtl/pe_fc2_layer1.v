@@ -6,7 +6,7 @@ module pe_fc_layer1
 (
 //system signal
     input                               clk                        ,
-    input                               rstn                      ,
+    input                               rstn                       ,
     
 //fc_2ram_controller
     input                 [`SYNAPSE_INDEX-1 : 0] s_index_ram               ,
@@ -60,7 +60,6 @@ reg                 ram_release_reg;
 reg [`WEIGHT_BRAM-1 : 0]       weight_bram_addr_reg;
 
 //reg mp_ready_reg;
-
 reg weight_ready_reg;
 reg weight_ready_reg2;
 reg weight_ready_reg3;
@@ -74,10 +73,10 @@ reg  [`CHANNEL_WIDE-1:0] channel_num_reg4;
 
 //weight_bram_port_r
  wire   [3 : 0]                 weight_index_i             ;
- wire                           weight_ready               ;
+
 
 assign mp_ready=weight_ready;
-assign channel_num=channel_num_reg4;//mp_out
+assign channel_num=channel_num_reg4;
 assign ram_release=ram_release_reg;
 
 assign weight_ready=weight_ready_reg4? 1'b1:1'b0;

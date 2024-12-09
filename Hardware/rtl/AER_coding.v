@@ -23,14 +23,13 @@ localparam WRITEBACK = 2'd3;
 //reg
 reg      [1 : 0]         AER_current_state;
 reg      [1 : 0]         AER_next_state;
-//reg      [15 : 0]        s_index;
 reg      [15 : 0]        s_cnt;
 reg      [3 : 0]         s_cnt2;
 reg                      AER_done;
 reg      [15 : 0]        AER_index;
 reg                      AER_valid;
 reg                      pic_pos_valid_;
-//reg                      pic_index_valid;
+
       
 //wire
 wire     [9 : 0]         pic_num;

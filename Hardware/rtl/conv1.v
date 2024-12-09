@@ -175,11 +175,9 @@ always @(posedge clk or negedge rstn) begin
             begin
                 s_index_conv <= s_index_conv;
                 s_index_valid <= 1'b0;
-                // conv1_channel_o <= cnt_channel;
             end
             OVER:
             begin
-            //  cnt_channel <= cnt_channel + 1;
                 conv_over <= 1'b1;
             end
             default: ;
